@@ -39,7 +39,7 @@ try {
 <meta charset="utf-8">
 </head>
 <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen" href="qmain.css?v2">
+<link rel="stylesheet" type="text/css" media="screen" href="qmain.css?v26">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
@@ -61,6 +61,7 @@ try {
     function startTimer(duration, display) {
         var start = Date.now(),
         diff,
+        flag=0,
         minutes,
         seconds;
         function timer() {
@@ -76,7 +77,16 @@ try {
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
             display.textContent = minutes + ":" + seconds; 
-
+            if(diff<2*60 && flag!=1)
+            {
+                $.alert({
+                useBootstrap: false,
+                title: 'Hurry Up!',
+                content: 'Only 2 minutes left.',
+                });
+                $('#time').css("color","red");
+                flag=1;
+            }
             if (diff <= 0) {
             // add one second so that the count down starts at the full duration
             // example 05:00 not 04:59
@@ -88,7 +98,14 @@ try {
     setInterval(timer, 1000);
     }
     $(window).on('load', function () {
-        var Minutes = 60 * 60,
+
+
+
+        //Set TIME HERE
+
+
+
+        var Minutes = 10 * 60,
         display = document.querySelector('#time');
         $("#1").toggle();
         $('#prev').prop('disabled', true);
@@ -271,9 +288,9 @@ try {
 </script>
 <body>
     <div class='nav'>
-        <span>Timer : </span><span id="time">00:00</span>
+        <span>Time : </span><span id="time">00:00</span>
     </div>
-    <div class='left'>
+    <div class='left' style="display:none">
         <button class="lpane" id="b1" value='1'>1</button>
         <button class="lpane" id="b2" value='2'>2</button>
         <button class="lpane" id="b3" value='3'>3</button>
@@ -320,12 +337,13 @@ try {
             %>
         </form>
     <div class='botnav'>
-        <button id='prev' class="nn"><span>Prev</span></button>
-        <button id='mark' class="nn"> Mark </button>
-        <button id='next' class="nn" ><span>Next</span></button>
+        <button id='prev' style="display:none;" class="nn"><span>Prev</span></button>
+        <button id='mark' style="display:none;"  class="nn"> Mark </button>
+        <button id='next-bak' style="display:none;"  class="nn" ><span>Next</span></button>
     </div>
     <div class='bootnav'>
-    <button id="sub" class="nn1">submit</button>
+    <button id='next' class="nn1" ><span>Next</span></button>
+    <button id="sub" style="display:none;" class="nn1">submit</button>
     </div>
 </div>
 </body>   
