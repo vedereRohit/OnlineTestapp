@@ -39,8 +39,9 @@ try {
 <meta charset="utf-8">
 </head>
 <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen" href="qmain.css?v26">
+<link rel="stylesheet" type="text/css" media="screen" href="qmain.css?v2456">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script >
@@ -109,6 +110,8 @@ try {
         display = document.querySelector('#time');
         $("#1").toggle();
         $('#prev').prop('disabled', true);
+        $('#next').prop('disabled', true);
+        $('#sub').prop('disabled', true);
         startTimer(Minutes, display);
         $('#b1').css("background-color","#008CBA");
     });
@@ -194,6 +197,7 @@ try {
         });
 
         $('#next').click( function(){
+            $('#next').prop('disabled','true');
             if(arr[curr-1]!=1){
                 if(arr_ans[curr-1]!=1){
                     $('#b'+curr).css("background-color","grey");
@@ -284,12 +288,16 @@ try {
             arr_ans[parseInt(str.slice(2))-1]=1;
             if(arr[parseInt(str.slice(2))-1]!=1)
             $('#b'+str.slice(2)).css("background-color","#00ff00");
+            $('#next').prop('disabled',false);
+            if(curr==10){
+                $('#sub').prop('disabled', false);
+            }
         });
     });
 </script>
 <body>
     <div class='nav'>
-        <span>Time : </span><span id="time">00:00</span>
+        <span style='left:0%'><i class="fa fa-user-circle-o" aria-hidden="true"></i> <%=session.getAttribute("uid")%></span><span>Time : </span><span id="time">00:00</span>
     </div>
     <div class='left' style="display:none">
         <button class="lpane" id="b1" value='1'>1</button>
@@ -303,6 +311,8 @@ try {
         <button class="lpane" id="b9" value='9'>9</button>
         <button class="lpane" id="b10" value='10'>10</button>
     </div>
+    <img src='dxc.jpg' alt='your isp sucks' width='15%'/>
+    <img src='gitam.png' alt='you just missed the most important logo' style='left:1%;top:40%;position:absolute;'/>
     <div class='container'>
         <form name="ques" method="POST" action="eval.jsp">
               <% 
@@ -323,7 +333,7 @@ try {
                         options.add(j);
                     }
                     Collections.shuffle(options);
-                    out.print("<div class='qblock' id='"+i+"' style='display:none;'><table><tr><td>"+rs.getString("ques")+"</td></tr><tr class='blank_row'></tr>");
+                    out.print("<div class='qblock' id='"+i+"' style='display:none;'><table><tr><td>"+i+") "+rs.getString("ques")+"</td></tr><tr class='blank_row'></tr>");
                     out.print("<tr class='shuff'><td><input type='radio' name='op"+i+"' value='"+options.get(0)+"'/>"+rs.getString("op"+options.get(0))+"</td></tr>");
                     out.print("<tr class='shuff'><td><input type='radio' name='op"+i+"' value='"+options.get(1)+"'/>"+rs.getString("op"+options.get(1))+"</td></tr>");
                     out.print("<tr class='shuff'><td><input type='radio' name='op"+i+"' value='"+options.get(2)+"'/>"+rs.getString("op"+options.get(2))+"</td></tr>");

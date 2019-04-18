@@ -161,6 +161,9 @@ tr.shuff{
     height: 10px;
     background-color: #FFFFFF;
 }
+#sub:disabled{
+    background-color: grey;
+}
 #time
 {
 	position:absolute;
