@@ -230,7 +230,8 @@ try {
                 $('#prev').prop('disabled', false);
             }
             if(curr=='10'){
-                $('#next').prop('disabled', true);
+                $('#next').toggle();
+                $('#sub').toggle();
             }
         });
 
