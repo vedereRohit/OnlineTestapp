@@ -9,10 +9,17 @@
 <script>
 $(document).ready(function(){
     $('#cmd').click(function(){
+        $('#cmd').hide();
         window.print();
     });
 });
-
+<%
+if(session.getAttribute("cert")==null){
+    response.sendRedirect("user.jsp");
+    
+}
+session.removeAttribute("cert");
+%>
 </script>
 <style>
     body, html {
@@ -22,21 +29,20 @@ $(document).ready(function(){
     }
     
     .hero-image {
-      background-image: url("back.png");
+      background-image: url("back.jpg");
       height: 100%;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: cover;
       position: relative;
     }
     
     .hero-text {
       text-align: center;
       position: absolute;
-      top: 45%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: white;
+      color: #142f5b;
       font-family: 'Playball', cursive;
     }
     
@@ -57,10 +63,10 @@ $(document).ready(function(){
     }
     p{
         font-family: 'Pacifico', cursive;
-        font-size: 2em;
+        font-size: 1.5em;
     }
     h3{
-        font-size:3em;
+        font-size:2em;
     }
     </style>
     </head>
@@ -68,7 +74,7 @@ $(document).ready(function(){
     
     <div class="hero-image">
       <div class="hero-text">
-        <h1 style="font-size:5em">Certificate of  Excellence</h1>
+        <h1 style="font-size:3em">Certificate of  Excellence</h1>
         <p>Congrats you passed in our exam</p>
         <h3><%=session.getAttribute("uid")%></h3>
         <button id="cmd">Print me</button>
