@@ -117,7 +117,7 @@ try {
 
 
 
-        var Minutes = 0.1 * 60,
+        var Minutes = 10 * 60,
         display = document.querySelector('#time');
         $("#1").toggle();
         $('#prev').prop('disabled', true);
