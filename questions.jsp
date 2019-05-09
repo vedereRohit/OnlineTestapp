@@ -43,6 +43,7 @@ try {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script >
     //GLOBAL VARIABLES
     var arr = [0,0,0,0,0,0,0,0,0,0];
@@ -110,7 +111,7 @@ try {
     }
     $(window).on('load', function () {
         //Set TIME HERE
-        var Minutes = 0.2 * 60,
+        var Minutes = 10 * 60,
         display = document.querySelector('#time');
         $("#1").toggle();
         $('#prev').prop('disabled', true);
@@ -294,7 +295,7 @@ try {
 </script>
 <body>
     <div class='nav'>
-        <span>Time : </span><span id="time">00:00</span>
+        <span style='left:0%'><i class="fa fa-user-circle-o" aria-hidden="true"></i> <%=session.getAttribute("uid")%></span><span>Time : </span><span id="time">00:00</span>
     </div>
     <div class='left' style="display:none">
         <button class="lpane" id="b1" value='1'>1</button>
@@ -308,6 +309,8 @@ try {
         <button class="lpane" id="b9" value='9'>9</button>
         <button class="lpane" id="b10" value='10'>10</button>
     </div>
+    <img src='dxc.jpg' alt='your isp sucks' width='15%'/>
+    <img src='gitam.png' alt='you just missed the most important logo' style='left:1%;top:40%;position:absolute;'/>
     <div class='container'>
         <form name="ques" method="POST" action="eval.jsp">
               <% 
