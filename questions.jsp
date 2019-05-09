@@ -48,16 +48,21 @@ try {
     var arr = [0,0,0,0,0,0,0,0,0,0];
     var arr_ans = [0,0,0,0,0,0,0,0,0,0];
     var curr = '1';
-    function submit()
+     function submit()
     {
-        $.alert({
-            useBootstrap: false,
-            title: 'Time Up',
-            content: 'Your answers will be auto-submitted',
-        });
-        document.forms["ques"].submit();
+        $.confirm({
+                title: 'Time Up',
+                content: 'Your answers will be auto-submitted',
+                useBootstrap: false,
+                buttons: {
+                    ok: function () {
+                        document.forms["ques"].submit();
+                    },
+                }
+            });
+        
     }
-    setTimeout(submit,1000*60*60+1000);
+    
     function startTimer(duration, display) {
         var start = Date.now(),
         diff,
@@ -77,16 +82,22 @@ try {
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
             display.textContent = minutes + ":" + seconds; 
+
             if(diff<2*60 && flag!=1)
             {
                 $.alert({
                 useBootstrap: false,
                 title: 'Hurry Up!',
-                content: 'Only 2 minutes left.',
+                content: 'Less than 2 minutes left.',
                 });
                 $('#time').css("color","red");
                 flag=1;
             }
+            if(flag==1 && diff==0)
+            {
+                submit();
+            }
+
             if (diff <= 0) {
             // add one second so that the count down starts at the full duration
             // example 05:00 not 04:59
@@ -98,14 +109,8 @@ try {
     setInterval(timer, 1000);
     }
     $(window).on('load', function () {
-
-
-
         //Set TIME HERE
-
-
-
-        var Minutes = 10 * 60,
+        var Minutes = 0.2 * 60,
         display = document.querySelector('#time');
         $("#1").toggle();
         $('#prev').prop('disabled', true);
